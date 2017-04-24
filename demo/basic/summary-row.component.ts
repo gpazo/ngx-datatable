@@ -15,6 +15,7 @@ import { Component } from '@angular/core';
       <ngx-datatable
         class="material striped"
         [rows]="rows"
+        [scrollbarV]="true"
         [summaryRow]="summaryRow"
         [summaryRowHeight]="50"
         [columns]="columns"
