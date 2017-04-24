@@ -5266,7 +5266,7 @@ __export(__webpack_require__("./src/components/columns/column-cell.directive.ts"
         } else {
             module.exports = result.toString();
         }
-    
+
 
 /***/ }),
 
@@ -6886,7 +6886,7 @@ var DataTableHeaderComponent = (function () {
     DataTableHeaderComponent.prototype.onLongPressEnd = function (_a) {
         var event = _a.event, model = _a.model;
         this.dragEventTarget = event;
-        // delay resetting so sort can be 
+        // delay resetting so sort can be
         // prevented if we were dragging
         setTimeout(function () {
             model.dragging = false;
@@ -7797,7 +7797,7 @@ var ResizeableDirective = (function () {
         this.element = element.nativeElement;
     }
     ResizeableDirective.prototype.ngAfterViewInit = function () {
-        if (this.resizeEnabled) {
+        if (this.resizeEnabled && typeof document != 'undefined') {
             var node = document.createElement('span');
             node.classList.add('resize-handle');
             this.element.appendChild(node);
@@ -8499,7 +8499,7 @@ function elementsFromPoint(x, y) {
     var i;
     var d;
     // get all elements via elementFromPoint, and remove them from hit-testing in order
-    while ((current = document.elementFromPoint(x, y)) && elements.indexOf(current) === -1 && current != null) {
+    while ((current = typeof document != 'undefined' ? document.elementFromPoint(x, y): null) && elements.indexOf(current) === -1 && current != null) {
         // push the element and its current style
         elements.push(current);
         previousPointerEvents.push({
@@ -8781,11 +8781,11 @@ function getContentWidth(allColumns, defaultColWidth) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var camel_case_1 = __webpack_require__("./src/utils/camel-case.ts");
 var cache = {};
-var testStyle = document.createElement('div').style;
+var testStyle = typeof document != 'undefined' ? document.createElement('div').style : [];
 // Get Prefix
 // http://davidwalsh.name/vendor-prefix
 var prefix = (function () {
-    var styles = window.getComputedStyle(document.documentElement, '');
+    var styles = typeof window != 'undefined' ? window.getComputedStyle(document.documentElement, '') : [];
     var pre = (Array.prototype.slice.call(styles).join('').match(/-(moz|webkit|ms)-/))[1];
     var dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1];
     return {
@@ -9238,7 +9238,7 @@ var transform = prefixes_1.getVendorPrefixedName('transform');
 var backfaceVisibility = prefixes_1.getVendorPrefixedName('backfaceVisibility');
 var hasCSSTransforms = !!prefixes_1.getVendorPrefixedName('transform');
 var hasCSS3DTransforms = !!prefixes_1.getVendorPrefixedName('perspective');
-var ua = window.navigator.userAgent;
+var ua = typeof window != 'undefined' ? window.navigator.userAgent : null;
 var isSafari = (/Safari\//).test(ua) && !(/Chrome\//).test(ua);
 function translateXY(styles, x, y) {
     if (hasCSSTransforms) {
